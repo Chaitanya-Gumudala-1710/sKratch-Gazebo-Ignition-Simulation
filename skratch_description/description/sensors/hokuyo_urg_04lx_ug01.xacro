@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot name="hokuyo_urg_lidar" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="hokuyo_urg_lidar" params="name parent *origin">
+        <link name="${name}_hokuyo_urg_lidar_link">
+            <inertial>
+                <mass value="0.16"/>
+                <origin xyz="0 0 0.035" rpy="0 0 0"/>
+                <inertia ixx="0.0001563" iyy="0.0001563" izz="0.0001333" ixy="0.0" ixz="0.0" iyz="0.0"/>
+            </inertial>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="file://$(find skratch_description)/meshes/sensors/Hokuyo_URG_04LX_UG01.stl" scale="1 1 1"/>
+                </geometry>
+                <material name="Black">
+                    <color rgba="0.0 0.0 0.0 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="file://$(find skratch_description)/meshes/sensors/Hokuyo_URG_04LX_UG01.stl" scale="1 1 1"/>
+                </geometry>
+            </collision>
+        </link>
+        <gazebo reference="${name}">
+            <material>Gazebo/Black</material>
+        </gazebo>
+        <joint name="${name}_hokuyo_urg_lidar_mount_joint" type="fixed">
+            <xacro:insert_block name="origin"/>
+            <parent link="${parent}"/>
+            <child link="${name}_hokuyo_urg_lidar_link"/>
+        </joint>
+    </xacro:macro>
+</robot>

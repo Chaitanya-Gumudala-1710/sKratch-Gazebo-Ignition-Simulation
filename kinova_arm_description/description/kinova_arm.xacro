@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot name="kinova_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="kinova_arm">
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_base.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_shoulder.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_half_arm_one.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_half_arm_two.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_fore_arm.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_spherical_wrist_one.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_spherical_wrist_two.xacro"/>
+        <xacro:include filename="$(find kinova_arm_description)/description/kinova_camera.xacro"/>
+        <xacro:kinova_base/>
+        <xacro:kinova_shoulder/>
+        <joint name="shoulder_joint" type="continuous">
+            <origin xyz="0 0.0 0.154" rpy="0 0 0"/>
+            <parent link="kinova_base"/>
+            <child link="kinova_shoulder"/>
+            <axis xyz="0.0 0.0 1.0"/>
+        </joint>
+        <xacro:kinova_half_arm_one/>
+        <joint name="half_arm_one_joint" type="revolute">
+            <origin xyz="0 0 0.126" rpy="0 0 0"/>
+            <parent link="kinova_shoulder"/>
+            <child link="kinova_half_arm_one"/>
+            <axis xyz="0.0 1.0 0.0"/>
+            <limit lower="-2.249729" upper="2.249729" effort="1000" velocity="1000"/>
+        </joint>
+        <xacro:kinova_half_arm_two/>
+        <joint name="half_arm_two_joint" type="continuous">
+            <origin xyz="0 -0.011 0.2" rpy="0 0 0"/>
+            <parent link="kinova_half_arm_one"/>
+            <child link="kinova_half_arm_two"/>
+            <axis xyz="0.0 0.0 1.0"/>
+        </joint>
+        <xacro:kinova_fore_arm/>
+        <joint name="fore_arm_joint" type="revolute">
+            <origin xyz="0 0.0 0.22" rpy="0 0 0"/>
+            <parent link="kinova_half_arm_two"/>
+            <child link="kinova_fore_arm"/>
+            <axis xyz="0.0 1.0 0.0"/>
+            <limit lower="-2.579597" upper="2.579597" effort="1000" velocity="1000"/>
+        </joint>
+        <xacro:kinova_spherical_wrist_one/>
+        <joint name="spherical_wrist_one_joint" type="continuous">
+            <origin xyz="0 0.0 0.21" rpy="0 0 0"/>
+            <parent link="kinova_fore_arm"/>
+            <child link="kinova_spherical_wrist_one"/>
+            <axis xyz="0.0 0.0 1.0"/>
+        </joint>
+        <xacro:kinova_spherical_wrist_two/>
+        <joint name="spherical_wrist_two_joint" type="revolute">
+            <origin xyz="0 0.0 0.1035" rpy="0 0 0"/>
+            <parent link="kinova_spherical_wrist_one"/>
+            <child link="kinova_spherical_wrist_two"/>
+            <axis xyz="0.0 1.0 0.0"/>
+            <limit lower="-2.099631" upper="2.099631" effort="1000" velocity="1000"/>
+        </joint>
+        <xacro:kinova_camera/>
+        <joint name="camera_joint" type="continuous">
+            <origin xyz="0 0.0 0.11" rpy="0 0 0"/>
+            <parent link="kinova_spherical_wrist_two"/>
+            <child link="kinova_camera"/>
+            <axis xyz="0.0 0.0 1.0"/>
+        </joint>
+    </xacro:macro>
+</robot>
