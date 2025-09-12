@@ -32,7 +32,7 @@
         <child link="arm_base_plate"/>
     </joint>
     <xacro:lidar_mount name="front" parent="skratch_base" >
-        <origin xyz="0.272 -0.16 0.0025" rpy="0.0 0.0 0.0"/>
+        <origin xyz="0.272 -0.168 0.0025" rpy="0.0 0.0 0.0"/>
     </xacro:lidar_mount>
     <xacro:lidar_mount name="back" parent="skratch_base" >
         <origin xyz="-0.272 0.168 0.0025" rpy="0.0 0.0 3.14"/>
