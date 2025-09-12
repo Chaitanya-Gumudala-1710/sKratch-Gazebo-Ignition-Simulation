@@ -33,7 +33,7 @@
             <child link="${name}_lidar_mount"/>
         </joint>
         <xacro:hokuyo_urg_lidar name="${name}_hokuyo_urg_lidar" parent="${name}_lidar_mount">
-            <origin xyz="0.045 -0.045 -0.095" rpy="3.14 0.0 -0.77"/>
+            <origin xyz="0.045 -0.045 -0.1" rpy="3.14 0.0 -0.77"/>
         </xacro:hokuyo_urg_lidar>
     </xacro:macro>
 </robot>
