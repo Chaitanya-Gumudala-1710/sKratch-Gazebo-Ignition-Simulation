@@ -1,11 +1,20 @@
 <?xml version="1.0" ?>
+<!--
+Copyright (c) 2025
+b-it-bots
+Hochschule Bonn-Rhein-Sieg
+
+Authors:
+Chaitanya Gumudala
+-->
 <robot name="skratch" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:arg name="movable_joints" default="true"/>
     <xacro:include filename="$(find skratch_description)/description/base/skratch_base.xacro"/>
     <xacro:include filename="$(find skratch_description)/description/base/kinova_arm_base_plate.xacro"/>
     <xacro:include filename="$(find skratch_description)/description/wheels/kelo_drive_top_part.xacro"/>
     <xacro:include filename="$(find skratch_description)/description/skratch_ros.xacro"/>
     <xacro:include filename="$(find skratch_description)/description/sensor_mounts/lidar_mount.xacro"/>
-    <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm.xacro"/>
+    <!-- <xacro:include filename="$(find kinova_arm_description)/description/kinova_arm.xacro"/> -->
     <link name="base_link"/>
     <xacro:skratch_base name="skratch_base"/>
     <joint name="base_link_joint" type="fixed">
@@ -13,16 +22,16 @@
         <parent link="base_link"/>
         <child link="skratch_base"/>
     </joint>
-    <xacro:kelo_drive_top_part name="front_left_drive_top_part" parent="skratch_base" drive_name="skratch_1_drive">
+    <xacro:kelo_drive_top_part name="front_left_drive_top_part" parent="skratch_base" drive_name="skratch_1_drive" movable_joints="$(arg movable_joints)">
         <origin xyz="0.202 0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
-    <xacro:kelo_drive_top_part name="front_right_drive_top_part" parent="skratch_base" drive_name="skratch_2_drive">
+    <xacro:kelo_drive_top_part name="front_right_drive_top_part" parent="skratch_base" drive_name="skratch_2_drive" movable_joints="$(arg movable_joints)">
         <origin xyz="0.202 -0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
-    <xacro:kelo_drive_top_part name="rear_left_drive_top_part" parent="skratch_base" drive_name="skratch_3_drive">
+    <xacro:kelo_drive_top_part name="rear_left_drive_top_part" parent="skratch_base" drive_name="skratch_3_drive" movable_joints="$(arg movable_joints)">
         <origin xyz="-0.202  0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
-    <xacro:kelo_drive_top_part name="rear_right_drive_top_part" parent="skratch_base" drive_name="skratch_4_drive">
+    <xacro:kelo_drive_top_part name="rear_right_drive_top_part" parent="skratch_base" drive_name="skratch_4_drive" movable_joints="$(arg movable_joints)">
         <origin xyz="-0.202 -0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
     <xacro:arm_base_plate name="arm_base_plate"/>
@@ -37,10 +46,10 @@
     <xacro:lidar_mount name="back" parent="skratch_base" >
         <origin xyz="-0.272 0.168 0.0025" rpy="0.0 0.0 3.14"/>
     </xacro:lidar_mount>
-    <xacro:kinova_arm/>
-    <joint name="kinova_arm_joint" type="fixed">
+    <!-- <xacro:kinova_arm/> -->
+    <!-- <joint name="kinova_arm_joint" type="fixed">
         <origin xyz="0.0 0.0 0.02" rpy="0 0 0"/>
         <parent link="arm_base_plate"/>
         <child link="kinova_base"/>
-    </joint>
+    </joint> -->
 </robot>

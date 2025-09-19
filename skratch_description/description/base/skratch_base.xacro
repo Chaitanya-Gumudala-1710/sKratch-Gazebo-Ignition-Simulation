@@ -1,4 +1,12 @@
 <?xml version="1.0"?>
+<!--
+Copyright (c) 2025
+b-it-bots
+Hochschule Bonn-Rhein-Sieg
+
+Authors:
+Chaitanya Gumudala
+-->
 <robot name="skratch_base" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <xacro:macro name="skratch_base" params="name">
         <link name="${name}">

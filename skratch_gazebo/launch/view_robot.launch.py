@@ -1,29 +1,56 @@
+# Author: Chaitanya Gumudala
+
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument
+from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution, FindExecutable
 from launch_ros.actions import Node
 from launch.conditions import IfCondition, UnlessCondition
-import xacro
+from launch_ros.substitutions import FindPackageShare
+from launch_ros.descriptions import ParameterValue
 
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     gui = LaunchConfiguration('gui')
+    movable_joints = LaunchConfiguration('movable_joints')
 
-    pkg_path = get_package_share_directory('skratch_description')
-    xacro_file = os.path.join(pkg_path, 'description', 'skratch.urdf.xacro')
+    # Path to your xacro file
+    xacro_file = PathJoinSubstitution([
+        FindPackageShare('skratch_description'),
+        'description',
+        'skratch.urdf.xacro'
+    ])
 
+    # Run xacro via Command substitution
+    robot_description_content = Command([
+        PathJoinSubstitution([FindExecutable(name='xacro')]),
+        ' ',
+        xacro_file,
+        ' ',
+        'movable_joints:=', movable_joints
+    ])
 
-    rviz_config_file = os.path.join(get_package_share_directory('skratch_gazebo'), 'config', 'rviz', 'skratch_description.rviz')
+    robot_description = {
+        'robot_description': ParameterValue(robot_description_content, value_type=str),
+        'use_sim_time': use_sim_time
+    }
 
-    robot_description_config = xacro.process_file(xacro_file)
-    robot_description = {'robot_description': robot_description_config.toxml(), 'use_sim_time': use_sim_time}
+    rviz_config_file = os.path.join(
+        get_package_share_directory('skratch_gazebo'),
+        'config',
+        'rviz',
+        'skratch_description.rviz'
+    )
 
     return LaunchDescription([
-        DeclareLaunchArgument('use_sim_time', default_value='false', description='Use simulation (Gazebo) clock if true'),
-        DeclareLaunchArgument('gui', default_value='true', description='Flag to enable joint_state_publisher_gui'),
+        DeclareLaunchArgument('use_sim_time', default_value='false',
+                              description='Use simulation (Gazebo) clock if true'),
+        DeclareLaunchArgument('gui', default_value='true',
+                              description='Flag to enable joint_state_publisher_gui'),
+        DeclareLaunchArgument('movable_joints', default_value='true',
+                              description='Enable or disable movable joints in URDF'),
 
         Node(
             package='robot_state_publisher',

@@ -4,7 +4,7 @@
     <name>skratch_gazebo</name>
     <version>0.0.0</version>
     <description>TODO: Gazebo of the sKratch robot</description>
-    <maintainer email="chaitanyagumudala961@gmail.com">Chaitanya</maintainer>
+    <maintainer email="chaitanyagumudala961@gmail.com">Chaitanya Gumudala</maintainer>
     <license>TODO: License declaration</license>
     <depend>rclcpp</depend>
     <depend>rclpy</depend>

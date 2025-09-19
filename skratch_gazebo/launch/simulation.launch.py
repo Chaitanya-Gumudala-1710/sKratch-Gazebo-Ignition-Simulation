@@ -1,22 +1,34 @@
+# Authors: Chaitanya Gumudala
+
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution, FindExecutable
 from launch.actions import DeclareLaunchArgument, TimerAction, ExecuteProcess, IncludeLaunchDescription
 from launch_ros.actions import Node
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-import xacro
+from launch_ros.descriptions import ParameterValue
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
     gui = LaunchConfiguration('gui')
+    movable_joints = LaunchConfiguration('movable_joints')
 
     pkg_path = get_package_share_directory('skratch_description')
     xacro_file = os.path.join(pkg_path, 'description', 'skratch.urdf.xacro')
 
     # Process xacro file
-    robot_description_config = xacro.process_file(xacro_file)
-    robot_description = {'robot_description': robot_description_config.toxml()}
+    robot_description_content = Command([
+        PathJoinSubstitution([FindExecutable(name='xacro')]),
+        ' ',
+        xacro_file,
+        ' ',
+        'movable_joints:=', movable_joints
+    ])
+    robot_description = {
+        'robot_description': ParameterValue(robot_description_content, value_type=str),
+        'use_sim_time': use_sim_time
+    }
 
     # Gazebo launch
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
@@ -125,10 +137,11 @@ def generate_launch_description():
                               description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument('gui', default_value='true',
                               description='Enable joint_state_publisher_gui'),
-
+        DeclareLaunchArgument('movable_joints', default_value='true',
+                              description='Enable or disable movable joints in URDF'),
         gazebo,
         spawn,
-        robot_state_publisher_node,     # publish TF from URDF
+        robot_state_publisher_node,   
         joint_state_publisher_node,
         ros_gz_bridge_node,
         ros_clock_node,
