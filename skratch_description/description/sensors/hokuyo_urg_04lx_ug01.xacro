@@ -60,7 +60,7 @@ Chaitanya Gumudala
                     </noise>
                 </lidar>
                 <topic>/${name}_scan</topic>
-                <gz_frame_id>hokuyo_urg04lx_link</gz_frame_id>
+                <gz_frame_id>${name}_hokuyo_urg_lidar_link</gz_frame_id>
             </sensor>
         </gazebo>
         <joint name="${name}_hokuyo_urg_lidar_mount_joint" type="fixed">
