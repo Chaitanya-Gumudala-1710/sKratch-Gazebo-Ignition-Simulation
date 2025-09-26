@@ -69,7 +69,7 @@ License LGPL and BSD license along with this program.
                 <axis xyz="0 0 1"/>
                 <parent link="${parent}"/>
                 <child link="${name}_pivot_link" />
-                <dynamics damping="0.1" friction="0.05"/>
+                <dynamics damping="1.0" friction="0.1"/>
                 <limit effort="2.0" velocity="1.0"/>
             </joint>
             <transmission name="${name}_pivot_transmission">
