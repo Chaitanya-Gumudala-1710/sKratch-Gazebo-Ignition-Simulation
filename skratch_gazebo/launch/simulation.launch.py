@@ -78,10 +78,10 @@ def generate_launch_description():
             cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'skratch_base_controller'],
             output='screen'
         ),
-        ExecuteProcess(
-            cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'kinova_arm_controller'],
-            output='screen'
-        )
+        # ExecuteProcess(
+        #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'kinova_arm_controller'],
+        #     output='screen'
+        # )
     ]
 
     # ROS-Gazebo Bridge for TF
@@ -104,6 +104,30 @@ def generate_launch_description():
         arguments=[
             '/clock@rosgraph_msgs/msg/Clock[ignition.msgs.Clock',
         ],
+        output='screen'
+    )
+
+    # ROS-Gazebo Bridge for Lidars
+    # First get the topic name from using ign topic -l
+    # Then echo the topic to see the message type using ign topic -e -t <topic_name>
+    # For lidars the message type will be ignition.msgs.LaserScan
+    # Use ros_gz_bridge to bridge the topics
+    # Example: ros2 run ros_gz_bridge parameter_bridge /lidar_topic_name@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan
+    # The name of the topic will be same as in Gazebo
+
+    # Front Lidar Bridge
+    front_lidar_bridge_node = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['front_hokuyo_urg_lidar_scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',],
+        output='screen' 
+    )
+
+    # Rear Lidar Bridge
+    rear_lidar_bridge_node = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/back_hokuyo_urg_lidar_scan@sensor_msgs/msg/LaserScan[ignition.msgs.LaserScan',],
         output='screen'
     )
 
@@ -145,6 +169,8 @@ def generate_launch_description():
         joint_state_publisher_node,
         ros_gz_bridge_node,
         ros_clock_node,
+        front_lidar_bridge_node,
+        rear_lidar_bridge_node,
         load_joint_state_controller,
         *controller_processes,
         skratch_platform_controller_node,
