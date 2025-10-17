@@ -22,16 +22,16 @@ Chaitanya Gumudala
         <parent link="base_link"/>
         <child link="skratch_base"/>
     </joint>
-    <xacro:kelo_drive_top_part name="front_left_drive_top_part" parent="skratch_base" drive_name="skratch_1_drive" movable_joints="$(arg movable_joints)">
+    <xacro:kelo_drive_top_part name="front_left" parent="skratch_base" movable_joints="$(arg movable_joints)">
         <origin xyz="0.202 0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
-    <xacro:kelo_drive_top_part name="front_right_drive_top_part" parent="skratch_base" drive_name="skratch_2_drive" movable_joints="$(arg movable_joints)">
+    <xacro:kelo_drive_top_part name="front_right" parent="skratch_base" movable_joints="$(arg movable_joints)">
         <origin xyz="0.202 -0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
-    <xacro:kelo_drive_top_part name="rear_left_drive_top_part" parent="skratch_base" drive_name="skratch_3_drive" movable_joints="$(arg movable_joints)">
+    <xacro:kelo_drive_top_part name="rear_left" parent="skratch_base" movable_joints="$(arg movable_joints)">
         <origin xyz="-0.202  0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
-    <xacro:kelo_drive_top_part name="rear_right_drive_top_part" parent="skratch_base" drive_name="skratch_4_drive" movable_joints="$(arg movable_joints)">
+    <xacro:kelo_drive_top_part name="rear_right" parent="skratch_base" movable_joints="$(arg movable_joints)">
         <origin xyz="-0.202 -0.118 -0.054" rpy="0.0 0 0.0"/>
     </xacro:kelo_drive_top_part>
     <xacro:arm_base_plate name="arm_base_plate"/>

@@ -36,18 +36,18 @@ Chaitanya Gumudala
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </hardware>
-        <xacro:joint_interface joint_name="skratch_1_drive_pivot_joint"/>
-        <xacro:joint_interface joint_name="skratch_1_drive_left_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_1_drive_right_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_2_drive_pivot_joint"/>
-        <xacro:joint_interface joint_name="skratch_2_drive_left_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_2_drive_right_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_3_drive_pivot_joint"/>
-        <xacro:joint_interface joint_name="skratch_3_drive_left_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_3_drive_right_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_4_drive_pivot_joint"/>
-        <xacro:joint_interface joint_name="skratch_4_drive_left_hub_wheel_joint"/>
-        <xacro:joint_interface joint_name="skratch_4_drive_right_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="front_left_drive_pivot_joint"/>
+        <xacro:joint_interface joint_name="front_left_drive_left_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="front_left_drive_right_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="front_right_drive_pivot_joint"/>
+        <xacro:joint_interface joint_name="front_right_drive_left_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="front_right_drive_right_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="rear_left_drive_pivot_joint"/>
+        <xacro:joint_interface joint_name="rear_left_drive_left_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="rear_left_drive_right_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="rear_right_drive_pivot_joint"/>
+        <xacro:joint_interface joint_name="rear_right_drive_left_hub_wheel_joint"/>
+        <xacro:joint_interface joint_name="rear_right_drive_right_hub_wheel_joint"/>
         <xacro:arm_joint_interface joint_name="shoulder_joint" initial_position="0"/>
         <xacro:arm_joint_interface joint_name="half_arm_one_joint" initial_position="-1.5"/>
         <xacro:arm_joint_interface joint_name="half_arm_two_joint" initial_position="0"/>

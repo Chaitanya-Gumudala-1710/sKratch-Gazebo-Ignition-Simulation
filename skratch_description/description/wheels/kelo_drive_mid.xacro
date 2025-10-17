@@ -39,7 +39,7 @@ You should have received a copy of the GNU Lesser General Public
 License LGPL and BSD license along with this program.
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="kelo_drive" params="name parent *origin movable_joints:=true">
+    <xacro:macro name="kelo_drive_mid" params="name parent *origin movable_joints:=true">
         <xacro:include filename="$(find skratch_description)/description/wheels/kelo_drive_wheel.xacro"/>
         <link name="${name}_pivot_link">
             <visual>
